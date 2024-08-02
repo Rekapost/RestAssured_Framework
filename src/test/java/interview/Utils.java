@@ -1,7 +1,6 @@
 package interview;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.requestSpecification;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.EncryptedDocumentException;
@@ -20,19 +18,19 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import junit.framework.Assert;
 import reusableMethods.JsonUtils;
 import reusableMethods.Payloads;
-import reusableMethods.RestUtils;
+//import reusableMethods.RestUtils;
 import testCase.APIs;
 import testCase.BaseEnvironment;
 
@@ -43,15 +41,16 @@ public class Utils {
 	public static void info(String message) {
 		logger.info(message);	
 		}
+	
 //1.	
 	public static RequestSpecification getRequest(String endpoint, Object payload, Map<String, String> headers )
 		{	
-	       		given()
+		return	given()
 				.baseUri(endpoint)
 				.body(payload)
 				.headers(headers)
 				.contentType(ContentType.JSON);	
-	       return requestSpecification;
+	             
 	}
 	  
 //2	
@@ -65,14 +64,15 @@ public class Utils {
 		//sObject requestPayloadAsPojo
 	}
 	
-//3.
+//3. //Method 1
 	public static Map<String,Object> CreatePayloadMap(String name,String job) {	
 		Map<String , Object> data= new HashMap<>();
 		data.put("name", name);
 		data.put("job", job);
 		return data;		
 	}
-		
+	
+	//Method 2
 	public static String CreatePayloadString(String name, String job) {	 
 		String payload="{\r\n"
 				+ "    \"name\": \""+name+"\",\r\n"
@@ -81,41 +81,45 @@ public class Utils {
 		return payload;		
 			}
 	
-//4.
+//4. Test Method 1
 	//@Test
 	public void testPostUsingMap() {
 		String endPoint = "https://reqres.in/api/users";
-		Map<String, Object> requestMapPayload = Payloads.CreatePayloadMap("RekaNV", "QA");
-		Response response = RestUtils.performPost(endPoint, requestMapPayload, new HashMap<>());
+		Map<String, Object> requestMapPayload = CreatePayloadMap("RekaNV", "QA");
+		Response response = performPost(endPoint, requestMapPayload, new HashMap<>());
 		Assert.assertEquals(response.statusCode(), 201);
+		System.out.println(response.statusCode());
 	}
 	
-//x	
+	//Test Method 2
 	public Response createAPIs(Map<String,Object> createPayload) {
 			String endPoint	= (String) BaseEnvironment.dataFromJsonFile.get("createQAEndpoint");
 			//object to string so casting (String)
-			return  RestUtils.performPost(endPoint, createPayload, new HashMap<>());		 
+			return performPost(endPoint, createPayload, new HashMap<>());		 
 			}
-//y.@Test
+	//@Test  //run through testng.xml
 	public void dataFromDataFaker() throws StreamReadException, DatabindException, IOException {
 		APIs apis=new APIs();  // OR u can extend the class to APIs
 		Map<String, Object> requestMapPayload = Payloads.CreatePayloadMapDataFaker();
-		Response response = apis.createAPIs(requestMapPayload);
+		Response response =apis.createAPIs(requestMapPayload);
 		Assert.assertEquals(response.statusCode(), 201);
+		System.out.println(response.statusCode());
 	}
-
-//5.@Test
+	
+	//Test Method 3
+	//@Test   //Run through testng.xml
 	public void testPostUsingJsonFile() throws StreamReadException, DatabindException, IOException {
 		Map<String, Object> data = JsonUtils.getJsonDataAsMap("/environments/qa/ApiData.json");
 		// String endPoint="https://reqres.in/api/users";
 		String endPoint = (String) data.get("createQAEndpoint");
-		Map<String, Object> requestMapPayload = Payloads.CreatePayloadMap("RekaNV", "QA");
-		Response response = RestUtils.performPost(endPoint, requestMapPayload, new HashMap<>());
+		Map<String, Object> requestMapPayload = CreatePayloadMap("RekaNV", "QA");
+		Response response = performPost(endPoint, requestMapPayload, new HashMap<>());
 		Assert.assertEquals(response.statusCode(), 201);
+		System.out.println(response.statusCode());
 	}
 
 	
-	
+	//To read data from json file
 	public static Map<String,Object> readJsonFile(String filename) throws StreamReadException, DatabindException, IOException 
 	{
 		ObjectMapper mapper= new ObjectMapper();
@@ -124,6 +128,7 @@ public class Utils {
 		return data;	
 	}	
 		
+	//To read data from excel Excel Reader
 	public static List<LinkedHashMap<String,String>> readDataDromExcel(String excelFileName, String sheetname) throws EncryptedDocumentException, IOException
 	{
 		DataFormatter formatter=new DataFormatter();
@@ -155,7 +160,7 @@ public class Utils {
 		return dataFromExcel;
 	}
 	
-	
+	//To read data from config.properties file
 	public void readDataFromConfigFile() throws IOException {
 		String filePath=" ";
 		FileInputStream stream= new FileInputStream(filePath);
@@ -165,7 +170,8 @@ public class Utils {
 		stream.close();				
 	}
 	
-/*	public void user_login_using_username_and_password_from_given_and(String sheetName, Integer rowNumber)
+/*	   // To read data from excel 	
+       public void user_login_using_username_and_password_from_given_and(String sheetName, Integer rowNumber)
 			throws IOException, InvalidFormatException, InterruptedException {
 		ExcelReader reader = new ExcelReader();
 		Loggerload.info("User enter login credentials ");
@@ -175,7 +181,7 @@ public class Utils {
 		collection.loginWithCredentials(User_name, Pass_word);
 */
 	
-/*	
+/*	//Normal/Basic RestAssured method 
 	RestAssured.requestSpecification = given()
 			.header("Content-Type","application/json")
 			.contentType(ContentType.JSON)

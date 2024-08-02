@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-08-01T18:28:28 CDT" name="Suite" finished-at="2024-08-01T18:28:31 CDT" duration-ms="2824">
+  <suite started-at="2024-08-02T16:22:38 CDT" name="Suite" finished-at="2024-08-02T16:22:40 CDT" duration-ms="1886">
     <groups>
     </groups>
-    <test started-at="2024-08-01T18:28:28 CDT" name="Test" finished-at="2024-08-01T18:28:31 CDT" duration-ms="2824">
-      <class name="testCase.ReqRes_Test">
-        <test-method signature="createandverifyResponse()[pri:8, instance:testCase.ReqRes_Test@4dc27487]" started-at="2024-08-01T18:28:28 CDT" name="createandverifyResponse" finished-at="2024-08-01T18:28:31 CDT" duration-ms="2540" status="PASS">
+    <test started-at="2024-08-02T16:22:38 CDT" name="Test" finished-at="2024-08-02T16:22:40 CDT" duration-ms="1886">
+      <class name="interview.Utils">
+        <test-method signature="testPostUsingJsonFile()[pri:0, instance:interview.Utils@7813cb11]" started-at="2024-08-02T16:22:38 CDT" name="testPostUsingJsonFile" finished-at="2024-08-02T16:22:40 CDT" duration-ms="1712" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createandverifyResponse -->
-      </class> <!-- testCase.ReqRes_Test -->
+        </test-method> <!-- testPostUsingJsonFile -->
+      </class> <!-- interview.Utils -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

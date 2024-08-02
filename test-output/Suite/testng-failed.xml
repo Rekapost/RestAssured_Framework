@@ -6,11 +6,11 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="testCase.ReqRes_Test">
+      <class name="interview.Utils">
         <methods>
-          <include name="dataFromPojoBuilder"/>
+          <include name="testPostUsingMap"/>
         </methods>
-      </class> <!-- testCase.ReqRes_Test -->
+      </class> <!-- interview.Utils -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
