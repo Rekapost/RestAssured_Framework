@@ -49,7 +49,7 @@
 		</dependency>
 
 		<!--
-		https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		jackson-databind provides the functionality to convert between JSON and Java objects, a process known as data binding. -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -80,7 +80,7 @@
 			<version>1.5.1</version>
 			<scope>test</scope>
 		</dependency>
-
+<!-- json-path, you can navigate and query JSON structures to retrieve specific pieces of data without needing to deserialize the entire JSON into Java objects.-->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>json-path</artifactId>
@@ -93,7 +93,7 @@
 			<artifactId>json</artifactId>
 			<version>20240303</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<!--  A Java library used to for converting Java objects into JSON (serialization) and JSON back into Java objects (deserialization). -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>

@@ -9,8 +9,8 @@ import lombok.Builder;
 import randomDataUtils.RandomDataGenerator;
 import randomDataUtils.RandomDataTypeNames;
 
-//	@Builder(toBuilder=true) // if not set true it will take default values for miising fields 0, null
-//  and we cannot use thismethod new ReqResPojo( ReqResPojo payload= new ReqResPojo().toBuilder().name("Reka").build();   
+//	@Builder(toBuilder=true) // if not set true it will take default values for missing fields 0, null
+//  and we cannot use this method new ReqResPojo( ReqResPojo payload= new ReqResPojo().toBuilder().name("Reka").build();   
 	@Getter
 	@Data
 	@NoArgsConstructor 

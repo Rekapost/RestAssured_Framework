@@ -124,5 +124,9 @@ public class ReqRes_Test {
 			ObjectMapper objectMapper = new ObjectMapper();
 			PojoLombok createReqResResponse = objectMapper.readValue(response.getBody().asString(), PojoLombok.class);
 	        Assert.assertEquals(createReqResResponse, pojoBody);
+	        
+	       //String name= createReqResResponse.getName();
+	       
+	        
 	}					
 }

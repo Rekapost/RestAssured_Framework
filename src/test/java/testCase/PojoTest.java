@@ -46,7 +46,7 @@ public class PojoTest {
 		    		+ "    \"job\": \"Tester\"\r\n"
 		    		+ "}";
 		    PojoLombok javaobject=  mapper.readValue(jsondata,PojoLombok.class);
-		  System.out.println(javaobject.getName());
-		  System.out.println( javaobject.getJob());
+		    System.out.println(javaobject.getName());
+		    System.out.println( javaobject.getJob());
 	}
 }
