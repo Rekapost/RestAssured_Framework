@@ -2,6 +2,8 @@ package randomDataUtils;
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 
+//import com.github.javafaker.Faker;
+
 public class RandomDataGenerator {
 	
 	public static Faker faker = new Faker();

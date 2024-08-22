@@ -1,15 +1,29 @@
+FROM maven:3.8.4-openjdk-11
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN mvn clean package
+CMD ["java", "-jar", "target/RestAssuredFramework-0.0.1-SNAPSHOT.jar"]
+
+#FROM maven:3.8.4-openjdk-11
+#COPY . /usr/src/app
+#WORKDIR /usr/src/app
+#RUN mvn clean package
+#CMD ["java", "-jar", "target/my-app.jar"]
+
+
 # Use a base image with JDK installed
-FROM maven:3.8.6-openjdk-11
+#FROM maven:3.8.6-openjdk-17
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+#WORKDIR /usr/src/app
 
 # Copy the pom.xml and download dependencies (for caching)
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
+#COPY pom.xml .
+#RUN mvn dependency:go-offline -B
 
 # Copy the entire project into the container
-COPY . .
+#COPY . .
 
 # Build the project and run tests
-RUN mvn clean test
+#RUN mvn clean test -X
+
