@@ -1,8 +1,21 @@
-FROM maven:3.8.4-openjdk-11
-COPY . /usr/src/app
+
+FROM maven:3.8.4-openjdk-11 AS builder
 WORKDIR /usr/src/app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src /usr/src/app/src
 RUN mvn clean package
-CMD ["java", "-jar", "target/RestAssuredFramework-0.0.1-SNAPSHOT.jar"]
+
+FROM openjdk:11-jre
+COPY --from=builder /usr/src/app/target/RestAssuredFramework-0.0.1-SNAPSHOT.jar /app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+
+#FROM maven:3.8.4-openjdk-11
+#COPY . /usr/src/app
+#WORKDIR /usr/src/app
+#RUN mvn clean package
+#CMD ["java", "-jar", "target/RestAssuredFramework-0.0.1-SNAPSHOT.jar"]
 
 #FROM maven:3.8.4-openjdk-11
 #COPY . /usr/src/app
